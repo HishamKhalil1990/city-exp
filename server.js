@@ -25,7 +25,7 @@ app.get('/location', (request, response, next) => {
         response.status(200).json(new Location(request.query.city, data.display_name, data.lat, data.lon));
         next();
     } else {
-        response.json(new Error());
+        response.status(500).json(new Error());
     }
 })
 app.get('/weather', (request, response) => {
