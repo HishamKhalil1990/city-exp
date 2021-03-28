@@ -9,7 +9,6 @@ const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
-const { response } = require("express");
 app.use(cors());
 app.get('/',(request,response)=>{
     const data = require('./data/location.json');
