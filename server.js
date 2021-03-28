@@ -20,21 +20,25 @@ const cors = require('cors');
 app.use(cors());
 app.get('/location', (request, response, next) => {
     const arrData = require('./data/location.json');
-    const data = arrData[0];
     if (request.query.city == 'seattle') {
+        const data = arrData[0];
         response.status(200).json(new Location(request.query.city, data.display_name, data.lat, data.lon));
         next();
     } else {
-        response.status(200).json(new Error);
+        response.json(new Error);
     }
 })
 app.get('/weather', (request, response) => {
     const objData = require('./data/weather.json');
     const weatherData = objData.data;
-    const returnedData = [];
-    weatherData.forEach(a => {
-        returnedData.push(new Weather(a.weather.description, a.valid_date))
-    })
     response.status(200).json(returnedData);
+    if (request.query.search_query == objData.city_name) {
+        const returnedData = [];
+        weatherData.forEach(a => {
+            returnedData.push(new Weather(a.weather.description, a.valid_date));
+        });
+    } else {
+        response.json(new Error);
+    }
 })
 app.listen(PORT);
