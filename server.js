@@ -8,6 +8,10 @@ function Weather(description,valid_date){
     this.forecast = description,
     this.time = valid_date;
 }
+function Error(){
+    this.status = 500,
+    this.responseText = "Sorry, something went wrong"
+}
 const express = require("express") 
 const app = express(); 
 require('dotenv').config(); 
@@ -30,7 +34,7 @@ app.get('/weather',(request,response)=>{
         })
         response.status(200).json(returnedData);
     }else{
-        response.send('empty');
+        response.status(200).json(new Error);
     }
 })
 app.listen(PORT);
