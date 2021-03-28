@@ -25,14 +25,14 @@ app.get('/location', (request, response, next) => {
         response.status(200).json(new Location(request.query.city, data.display_name, data.lat, data.lon));
         next();
     } else {
-        response.json(new Error);
+        response.json(new Error());
     }
 })
 app.get('/weather', (request, response) => {
     const objData = require('./data/weather.json');
     const weatherData = objData.data;
     response.status(200).json(returnedData);
-    if (request.query.search_query == objData.city_name) {
+    if (request.query.city == objData.city_name) {
         const returnedData = [];
         weatherData.forEach(a => {
             returnedData.push(new Weather(a.weather.description, a.valid_date));
