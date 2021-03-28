@@ -32,6 +32,7 @@ app.get('/weather', (request, response) => {
     const objData = require('./data/weather.json');
     const weatherData = objData.data;
     const returnedData = [];
+    console.log(request.query)
     weatherData.forEach(a => {
         returnedData.push(new Weather(a.weather.description, a.valid_date));
     });
