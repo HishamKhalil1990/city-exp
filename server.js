@@ -22,11 +22,15 @@ app.get('/location',(request,response,next)=>{
 })
 app.get('/weather',(request,response)=>{
     const objData = require('./data/weather.json');
-    const weatherData = objData.data;
-    const returnedData = [];
-    weatherData.forEach(a=>{
-        returnedData.push(new Weather(a.weather.description,a.valid_date))
-    })
-    response.status(200).json(returnedData);
+    if(request.query.search_query == objData.city_name){
+        const weatherData = objData.data;
+        const returnedData = [];
+        weatherData.forEach(a=>{
+            returnedData.push(new Weather(a.weather.description,a.valid_date))
+        })
+        response.status(200).json(returnedData);
+    }else{
+        response.send('empty');
+    }
 })
 app.listen(PORT);
