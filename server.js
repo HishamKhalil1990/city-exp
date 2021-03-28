@@ -1,3 +1,9 @@
+function Location(name,location,latitude,longitude){
+  this.search_query =  name,
+  this.formatted_query = location,
+  this.latitude = latitude,
+  this.longitude = longitude
+}
 const express = require("express")
 const app = express();
 require('dotenv').config();
@@ -6,5 +12,6 @@ const cors = require('cors');
 const { response } = require("express");
 app.use(cors());
 app.get('/',(request,response)=>{
-    response.status(200).json(require('./data/location.json'));
+    const data = require('./data/location.json');
+    response.status(200).json(new Location(query.search_query,query.location,data.lat,data.lon));
 })
