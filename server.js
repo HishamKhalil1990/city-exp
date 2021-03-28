@@ -10,7 +10,10 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 app.use(cors());
-app.get('/',(request,response)=>{
-    const data = require('./data/location.json');
-    response.status(200).json(new Location(query.search_query,query.location,data.lat,data.lon));
+app.get('/location',(request,response)=>{
+    const arrData = require('./data/location.json');
+    const data = arrData[0];
+    console.log(request.query);
+    response.status(200).json(new Location('seattle',data.display_name,data.lat,data.lon));
 })
+app.listen(PORT);
