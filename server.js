@@ -31,12 +31,12 @@ app.get('/location', (request, response, next) => {
 app.get('/weather', (request, response) => {
     const objData = require('./data/weather.json');
     const weatherData = objData.data;
-    response.status(200).json(returnedData);
     if (request.query.city == objData.city_name) {
         const returnedData = [];
         weatherData.forEach(a => {
             returnedData.push(new Weather(a.weather.description, a.valid_date));
         });
+        response.status(200).json(returnedData);
     } else {
         response.json(new Error);
     }
