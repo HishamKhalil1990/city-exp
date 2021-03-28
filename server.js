@@ -31,7 +31,7 @@ app.get('/location', (request, response, next) => {
 app.get('/weather', (request, response) => {
     const objData = require('./data/weather.json');
     const weatherData = objData.data;
-    if (request.query.city == objData.city_name) {
+    if (request.query.search_query == objData.city_name) {
         const returnedData = [];
         weatherData.forEach(a => {
             returnedData.push(new Weather(a.weather.description, a.valid_date));
